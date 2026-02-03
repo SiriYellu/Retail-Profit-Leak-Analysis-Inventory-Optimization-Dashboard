@@ -1,0 +1,2 @@
+# Retail-Profit-Leak-Analysis-Inventory-Optimization-Dashboard
+A  project using SQL, Power BI/Tableau, and Excel to identify revenue and margin losses in a retail business caused by discounts, returns, and inventory inefficiencies. The project models transactional data in a star schema, computes advanced KPIs using SQL, and presents actionable insights through interactive BI dashboards and Excel analysis.
