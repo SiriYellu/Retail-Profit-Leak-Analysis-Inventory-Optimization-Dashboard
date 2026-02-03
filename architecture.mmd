@@ -12,19 +12,18 @@ flowchart LR
         S7[Promotions CSV]
     end
 
-    DATA --> ETL[ETL / Load Scripts\n(Python or SQL Import)]
-    ETL --> DB[(SQL Database\nPostgreSQL / SQL Server)]
+    DATA --> ETL[ETL and Load Scripts]
+    ETL --> DB[(SQL Database: PostgreSQL or SQL Server)]
 
     subgraph SQL_LAYER[SQL Analytics Layer]
         STG[Staging Tables]
-        DWH[Star Schema\nFact + Dimensions]
-        VIEWS[Analytics Views\nKPIs + Aggregations]
+        DWH[Star Schema: Fact and Dimensions]
+        VIEWS[Analytics Views: KPIs and Aggregations]
     end
 
     DB --> STG --> DWH --> VIEWS
-
     VIEWS --> BI
     VIEWS --> XL
 
-    BI --> OUT1[Insights\nProfit Leaks, Returns, Discounts, Stockouts]
-    XL --> OUT2[Scenarios\nDiscount changes, Margin impact]
+    BI --> OUT1[Insights: Profit leaks, returns, discounts, stockouts]
+    XL --> OUT2[Scenarios: Discount changes and margin impact]
