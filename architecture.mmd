@@ -1,0 +1,30 @@
+flowchart LR
+    U[Stakeholders / Users] -->|Interact| BI[Power BI / Tableau Dashboards]
+    U -->|Download| XL[Excel What-If Model]
+
+    subgraph DATA[Data Sources]
+        S1[Orders CSV]
+        S2[Order Items CSV]
+        S3[Products CSV]
+        S4[Stores CSV]
+        S5[Inventory CSV]
+        S6[Returns CSV]
+        S7[Promotions CSV]
+    end
+
+    DATA --> ETL[ETL / Load Scripts\n(Python or SQL Import)]
+    ETL --> DB[(SQL Database\nPostgreSQL / SQL Server)]
+
+    subgraph SQL_LAYER[SQL Analytics Layer]
+        STG[Staging Tables]
+        DWH[Star Schema\nFact + Dimensions]
+        VIEWS[Analytics Views\nKPIs + Aggregations]
+    end
+
+    DB --> STG --> DWH --> VIEWS
+
+    VIEWS --> BI
+    VIEWS --> XL
+
+    BI --> OUT1[Insights\nProfit Leaks, Returns, Discounts, Stockouts]
+    XL --> OUT2[Scenarios\nDiscount changes, Margin impact]
