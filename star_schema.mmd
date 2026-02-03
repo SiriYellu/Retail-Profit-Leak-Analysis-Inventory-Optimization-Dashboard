@@ -1,0 +1,92 @@
+erDiagram
+    DIM_DATE ||--o{ FACT_SALES : has
+    DIM_PRODUCT ||--o{ FACT_SALES : has
+    DIM_STORE ||--o{ FACT_SALES : has
+    DIM_PROMOTION ||--o{ FACT_SALES : has
+
+    DIM_DATE ||--o{ FACT_RETURNS : has
+    DIM_PRODUCT ||--o{ FACT_RETURNS : has
+    DIM_STORE ||--o{ FACT_RETURNS : has
+
+    DIM_DATE ||--o{ FACT_INVENTORY_DAILY : has
+    DIM_PRODUCT ||--o{ FACT_INVENTORY_DAILY : has
+    DIM_STORE ||--o{ FACT_INVENTORY_DAILY : has
+
+    DIM_DATE {
+        int date_key PK
+        date full_date
+        int year
+        int quarter
+        int month
+        int day
+        string day_name
+        bool is_weekend
+    }
+
+    DIM_PRODUCT {
+        int product_key PK
+        string sku
+        string product_name
+        string category
+        string subcategory
+        string brand
+        float unit_cost
+        float list_price
+    }
+
+    DIM_STORE {
+        int store_key PK
+        string store_id
+        string store_name
+        string city
+        string state
+        string region
+        string store_type
+    }
+
+    DIM_PROMOTION {
+        int promo_key PK
+        string promo_id
+        string promo_name
+        string promo_type
+        float discount_pct
+        date start_date
+        date end_date
+    }
+
+    FACT_SALES {
+        int sales_key PK
+        int date_key FK
+        int product_key FK
+        int store_key FK
+        int promo_key FK
+        int order_id
+        int quantity
+        float unit_price
+        float discount_amount
+        float net_sales
+        float cogs
+        float gross_profit
+        float gross_margin_pct
+    }
+
+    FACT_RETURNS {
+        int return_key PK
+        int date_key FK
+        int product_key FK
+        int store_key FK
+        int order_id
+        int quantity_returned
+        float return_amount
+        string return_reason
+    }
+
+    FACT_INVENTORY_DAILY {
+        int inv_key PK
+        int date_key FK
+        int product_key FK
+        int store_key FK
+        int on_hand_qty
+        int on_order_qty
+        int stockout_flag
+    }
